@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .hidden { display: none; }
+        .loading-screen { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: red; 
+            color: white; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        .email-step { 
+            background: green; 
+            color: white; 
+            padding: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="email-step">EMAIL STEP (Should be visible)</div>
+    <div class="loading-screen hidden">LOADING SCREEN (Should be hidden)</div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded');
+            const loadingScreen = document.querySelector('.loading-screen');
+            const emailStep = document.querySelector('.email-step');
+            
+            console.log('Loading screen hidden?', loadingScreen.classList.contains('hidden'));
+            console.log('Loading screen computed display:', window.getComputedStyle(loadingScreen).display);
+            
+            // Force hide loading screen
+            loadingScreen.classList.add('hidden');
+            emailStep.classList.remove('hidden');
+            
+            console.log('After JavaScript - Loading screen hidden?', loadingScreen.classList.contains('hidden'));
+            console.log('After JavaScript - Loading screen computed display:', window.getComputedStyle(loadingScreen).display);
+        });
+    </script>
+</body>
+</html>

