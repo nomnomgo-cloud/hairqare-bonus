@@ -282,6 +282,142 @@ input:focus {
     border-color: #8ab4f8;
 }
 
+/* Password Incorrect Step Styling */
+.error-subtitle {
+    font-size: 14px;
+    color: #f28b82;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Gmail Prompt Verification Styling */
+.verification-description {
+    font-size: 14px;
+    color: #bdc1c6;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.more-info-link {
+    color: #8ab4f8;
+    text-decoration: none;
+}
+
+.more-info-link:hover {
+    text-decoration: underline;
+}
+
+.prompt-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin: 30px 0;
+    padding: 20px;
+    background-color: rgba(66, 69, 73, 0.3);
+    border-radius: 12px;
+    border: 1px solid #5f6368;
+}
+
+.prompt-number {
+    font-size: 48px;
+    font-weight: 400;
+    color: #e8eaed;
+    min-width: 80px;
+    text-align: center;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.number-loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(138, 180, 248, 0.3);
+    border-top: 4px solid #8ab4f8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.prompt-details {
+    flex: 1;
+}
+
+.prompt-details h3 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #e8eaed;
+    margin-bottom: 12px;
+}
+
+.prompt-instruction {
+    font-size: 14px;
+    color: #bdc1c6;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.prompt-instruction strong {
+    color: #e8eaed;
+}
+
+.verification-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0;
+    padding: 16px;
+}
+
+.status-text {
+    font-size: 14px;
+    color: #bdc1c6;
+}
+
+.status-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(138, 180, 248, 0.3);
+    border-top: 2px solid #8ab4f8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.try-other-button {
+    background-color: transparent;
+    color: #8ab4f8;
+    padding: 10px 24px;
+    border: 1px solid #5f6368;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.try-other-button:hover {
+    background-color: rgba(138, 180, 248, 0.08);
+    border-color: #8ab4f8;
+}
+
+@media (max-width: 480px) {
+    .prompt-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .prompt-number {
+        font-size: 40px;
+        min-width: auto;
+    }
+    
+    .prompt-details h3 {
+        font-size: 18px;
+    }
+}
+
 /* Loading Screen Styles */
 .loading-screen {
     position: fixed;

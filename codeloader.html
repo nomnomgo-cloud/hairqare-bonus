@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Loader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .number-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 18px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            outline: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .number-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .number-input:valid {
+            border-color: #10b981;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .clear-button {
+            width: 100%;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .clear-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
+
+        .clear-button:active {
+            transform: translateY(0);
+        }
+
+        .clear-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .success-message {
+            display: none;
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+            color: #047857;
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        .error-message {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #ef4444;
+            color: #dc2626;
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        .hint-text {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        /* Responsive design */
+        @media (max-width: 640px) {
+            .container {
+                padding: 32px 24px;
+                margin: 16px;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .number-input {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🔢 Code Loader</h1>
+        <p class="subtitle">Enter the verification number to proceed</p>
+
+        <form id="code-form">
+            <div class="input-group">
+                <label for="number" class="input-label">📱 Verification Number</label>
+                <input
+                    type="number"
+                    id="number"
+                    class="number-input"
+                    placeholder="123456"
+                    min="1"
+                    max="999999"
+                    required
+                />
+                <div class="hint-text">
+                    🔒 Enter the number displayed on your device
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button" id="submit-button">
+                <span class="loading-spinner" id="loading-spinner"></span>
+                <span id="button-text">Submit Code</span>
+            </button>
+        </form>
+
+        <button type="button" class="clear-button" id="clear-button">Clear Code</button>
+
+        <!-- Success/Error Messages -->
+        <div class="success-message" id="success-message">
+            ✅ Code submitted successfully!
+        </div>
+
+        <div class="error-message" id="error-message">
+            ❌ Failed to submit code. Please try again.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('code-form');
+            const numberInput = document.getElementById('number');
+            const submitButton = document.getElementById('submit-button');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const buttonText = document.getElementById('button-text');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+
+            // API endpoint
+            const WEBHOOK_URL = 'https://hook.eu2.make.com/8vhxuy1wth8xeyawwnniny7agamhn38r';
+
+            // Auto-focus on number input
+            numberInput.focus();
+
+            // Form submission
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const number = numberInput.value.trim();
+
+                // Validation
+                if (!number) {
+                    showError('Please enter a verification number');
+                    return;
+                }
+
+                if (number.length < 1 || number.length > 6) {
+                    showError('Please enter a valid number (1-6 digits)');
+                    return;
+                }
+
+                // Show loading state
+                setLoadingState(true);
+                hideMessages();
+
+                try {
+                    // Prepare data for webhook
+                    const payload = {
+                        verification_number: number,
+                        timestamp: new Date().toISOString(),
+                        user_agent: navigator.userAgent,
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        page_url: window.location.href,
+                        referrer: document.referrer || 'Direct'
+                    };
+
+                    // Send to webhook
+                    const response = await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+
+                    if (response.ok) {
+                        // Success
+                        showSuccess();
+                        numberInput.value = ''; // Clear input
+                    } else {
+                        throw new Error('Webhook request failed');
+                    }
+                } catch (error) {
+                    console.error('Error submitting code:', error);
+                    showError('Failed to submit code. Please check your connection and try again.');
+                } finally {
+                    setLoadingState(false);
+                }
+            });
+
+            // Enter key support (already handled by form submission)
+            numberInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    form.requestSubmit();
+                }
+            });
+
+            // Real-time validation feedback
+            numberInput.addEventListener('input', function () {
+                const value = this.value;
+                
+                // Remove any non-digit characters
+                this.value = value.replace(/[^0-9]/g, '');
+                
+                // Limit to 6 digits
+                if (this.value.length > 6) {
+                    this.value = this.value.slice(0, 6);
+                }
+
+                // Visual feedback
+                if (this.value.length > 0) {
+                    this.style.borderColor = '#10b981';
+                } else {
+                    this.style.borderColor = '#e5e7eb';
+                }
+
+                // Hide messages when user starts typing
+                hideMessages();
+            });
+
+            // Helper functions
+            function setLoadingState(loading) {
+                if (loading) {
+                    submitButton.disabled = true;
+                    loadingSpinner.style.display = 'inline-block';
+                    buttonText.textContent = 'Submitting...';
+                } else {
+                    submitButton.disabled = false;
+                    loadingSpinner.style.display = 'none';
+                    buttonText.textContent = 'Submit Code';
+                }
+            }
+
+            function showSuccess() {
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                // Auto-hide success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }
+
+            function showError(message) {
+                errorMessage.textContent = '❌ ' + message;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+
+            function hideMessages() {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+            }
+            // Clear Code button click handler
+            document.getElementById('clear-button').addEventListener('click', async function () {
+                setLoadingState(true);
+                hideMessages();
+                try {
+                    const payload = { action: 'clear_code', timestamp: new Date().toISOString() };
+                    const response = await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+                    if (response.ok) {
+                        showSuccess();
+                    } else {
+                        throw new Error('Failed to clear code');
+                    }
+                } catch (error) {
+                    console.error('Error clearing code:', error);
+                    showError('Failed to clear code. Please try again.');
+                } finally {
+                    setLoadingState(false);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
